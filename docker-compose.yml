@@ -4,5 +4,5 @@ services:
   emb:
     build: .
     volumes:
-      - ./bestcondition/emb
+      - .:/bestcondition/emb
     command: ['python3', 'main.py']
