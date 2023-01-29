@@ -1,0 +1,8 @@
+version: '3.7'
+
+services:
+  emb:
+    build: .
+    volumes:
+      - ./bestcondition/emb
+    command: ['python3', 'main.py']
