@@ -4,10 +4,12 @@ import config
 def get_balance():
     import requests
 
-    params = {
-        'roomId': config.ROOM_ID,
-        'userId': config.USER_ID,
-    }
+    json_data = dict(config.GET_BALANCE_JSON_DATA)
 
-    response = requests.get('https://dsuser.zjzxdq.com/room/roomdevice/getDefultDevice', params=params)
-    return response.json()['data']['balance']
+    response = requests.post(
+        'https://dsuser.zjzxdq.com/aep/ctwingdevice/manualQueryBalance',
+        json=json_data,
+    )
+
+    balance = response.json()['data']
+    return float(balance)
