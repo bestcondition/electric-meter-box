@@ -3,16 +3,15 @@ from email.header import Header
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-import config
-
-host = config.SMTP_HOST
-port = config.SMTP_PORT
-user = config.SMTP_USER
-password = config.SMTP_PASSWORD
+from config import config
 
 
 def send_mail(
         to, content, subject,
+        host=config.SMTP_HOST,
+        port=config.SMTP_PORT,
+        user=config.SMTP_USER,
+        password=config.SMTP_PASSWORD,
 ):
     smtp = smtplib.SMTP(host, port=port)
     smtp.ehlo()  # send the extended hello to our server

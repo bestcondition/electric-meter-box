@@ -1,7 +1,7 @@
 import sqlite3
 from datetime import datetime
 
-import config
+from config import config
 
 
 def get_conn():

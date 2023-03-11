@@ -2,10 +2,10 @@ import logging
 
 from apscheduler.schedulers.blocking import BlockingScheduler
 
-from db import insert_balance
-from zjzxdq import get_balance
-from send_mail import send_mail
-import config
+import db_impl.sqlite as db
+from get_balance_impl.zjzxdq import get_balance
+from util.send_mail import send_mail
+from config import config
 
 
 logging.root.setLevel('INFO')
@@ -17,9 +17,9 @@ to_email = config.TO_MAIL
 def job():
     balance = get_balance()
     logging.info(f'余额{balance}')
-    insert_balance(balance)
+    db.insert_balance(balance)
     logging.info(f'写入数据库')
-    if float(balance) < alert_number:
+    if float(balance) < float(alert_number):
         content = f'余额仅剩: {balance}, 请尽快充值'
         send_mail(to_email, content, '电表余额提醒')
 

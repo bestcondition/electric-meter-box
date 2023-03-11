@@ -2,7 +2,8 @@ version: '3.7'
 
 services:
   emb:
-    build: .
+    image: bestcondition/emb
     volumes:
-      - .:/bestcondition/emb
-    command: ['python3', 'main.py']
+      - ./data:/app/data
+    env_file:
+      - .env
