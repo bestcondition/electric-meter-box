@@ -1,4 +1,5 @@
 from os import environ
+import logging
 
 
 class EnvConfigBase:
@@ -30,6 +31,13 @@ class EnvConfigBase:
         for key in key_set:
             value = environ.get(key)
             if value is not None:
+                log_data = dict(
+                    msg='read key from env',
+                    key=item,
+                    env=key,
+                    value=value,
+                )
+                logging.info(f'{log_data}')
                 _expected_type = __annotations__.get(item, str)
                 value = _expected_type(value)
                 break
